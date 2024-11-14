@@ -1,0 +1,39 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "nasm",
+            "args": [
+                "-f", "bin",
+                "${file}",
+                "-o",
+                "${fileDirname}/../bin/${fileBasenameNoExtension}.bin"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "run",
+            "type": "shell",
+            "command": "qemu-system-i386",
+            "args": [
+                "-fda",
+                "${fileDirname}/../bin/${fileBasenameNoExtension}.bin"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "dependsOn": ["build"]
+        }
+    ]
+}
